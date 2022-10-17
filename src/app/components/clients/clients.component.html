@@ -1,0 +1,51 @@
+<div class="row m-3">
+    <div class="col-md-6">
+        <a routerLink="/client/add" class="btn btn-success">
+            <i class="fa fa-plus" aria-hidden="true"></i>New client
+        </a>
+    </div>
+    <div class="col-md-6">
+        <h4 class="text-right">Total :{{total | currency :"USD" :"symbol"}}</h4>
+    </div>
+</div>
+
+<div class="card">
+    <div class="card-body">
+        <h4 class="card-title">List Clients</h4>
+        <input type="text" class="form-control" placeholder="Search..." #query (keyup)="search(query.value)">
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead class="table-light">
+                    <!--<caption>Table Name</caption>-->
+                    <tr>
+                        <th>firstName</th>
+                        <th>lastName </th>
+                        <th>Email </th>
+                        <th>Phone</th>
+                        <th>Balance</th>
+                        <th>#Action</th>
+                    </tr>
+                    </thead>
+                    <tbody class="table-group-divider">
+                        <tr class="table-primary"  *ngFor="let client of searchClient" (click)="deleteClient(client.id)">
+                            <td scope="row"> {{client.firstName}}</td>
+                            <td> {{client.lastName}}</td>
+                            <td> {{client.email}}</td>
+                            <td> {{client.phone}} </td>
+                            <td> {{client.balance | currency : 'USD' : 'symbol'}} </td>
+                            <td class="text-right"> 
+                                <a routerLink="/client/{{client.id}}" class="btn btn-info"><i class="fa fa-info-circle" aria-hidden="true"></i></a>
+                                <a routerLink="/client/edit/{{client.id}}" class="btn btn-warning"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+                                <a routerLink="/" class="btn btn-dark"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                            </td>
+                        </tr>
+                        
+                    </tbody>
+                    <tfoot>
+                        
+                    </tfoot>
+            </table>
+        </div>
+        
+    </div>
+</div>
